@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css')}}" />
+    <!-- Incluir HTMX -->
+    <script src="{{ url_for('static', filename='js/htmx.min.js') }}"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b9baff">
+        <div class="container-fluid">
+            <!-- Enlace principal -->
+            <a class="navbar-brand" href="#">Principal</a>
+
+            <!-- Botón para dispositivos pequeños -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menú del lado derecho -->
+            <div class="d-flex align-items-center">
+                <!-- Nombre del usuario -->
+                {% if session.get("name_user") %}
+                <span class="navbar-text me-2">
+                    Hola, <b>{{ session["name_user"] }} |</b>
+                </span>
+                {% endif %}
+                <!-- Botón de salir -->
+                <a class="link-primary fw-bold" href="{{ url_for('login.logout') }}">( SALIR )</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="body-content">
+            {% block content %} {% endblock %}
+            <hr />
+        </div>
+    </div>
+
+    <!-- Otros scripts -->
+    <script src="{{ url_for('static', filename='js/alertasSwal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sweetalert2.js') }}"></script>
+</body>
+
+</html>
